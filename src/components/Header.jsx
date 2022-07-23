@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Input from './Input';
 
 class Header extends Component {
   render() {
@@ -9,11 +8,6 @@ class Header extends Component {
     return (
       <header>
         <h4>Usuário: { email }</h4>
-        <Input 
-          type="button"
-          value="Logout"
-          id="logoutBtn"
-        />
       </header>
     );
   }

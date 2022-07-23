@@ -27,13 +27,7 @@ class StocksTable extends Component {
                 <td>{ setor }</td>
                 <td>{ cotacao }</td>
                 <td>
-                  <button type="button">Editar</button>
-                  <button
-                    type="button"
-                    data-testid="delete-btn"
-                  >
-                    Excluir
-                  </button>
+                  <button type="button">Detalhes</button>
                 </td>
               </tr>)) }
         </tbody>

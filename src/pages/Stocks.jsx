@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {fetchStocks} from '../actions';
 import StocksTable from '../components/StocksTable';
+import Footer from '../components/Footer';
 
 class Stocks extends Component {
   componentDidMount = async () => {
@@ -16,6 +17,7 @@ class Stocks extends Component {
       <div>
         <Header/>
         <StocksTable />
+        <Footer />
       </div>
     );
   }
