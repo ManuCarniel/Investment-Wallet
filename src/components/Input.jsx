@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-export default class Input extends Component {
+class Input extends Component {
   render() {
     const { id } = this.props;
 
@@ -16,3 +16,5 @@ export default class Input extends Component {
 Input.propTypes = {
   id: PropTypes.string,
 }.isRequired;
+
+export default Input;

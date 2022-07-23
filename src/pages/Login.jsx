@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import { addEmail } from '../actions';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   state = {
@@ -49,6 +50,7 @@ class Login extends React.Component {
           value={ password }
           onChange={ this.handleChange }
         />
+        <Link to="/stocks">
           <Input
             type="button"
             name="loginBtn"
@@ -57,6 +59,7 @@ class Login extends React.Component {
             disabled={ isDisabled }
             onClick={ () => add(email) }
           />
+        </Link>
       </div>
     );
   }
