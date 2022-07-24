@@ -14,24 +14,26 @@ class StocksDetails extends Component {
   
   buyOperation = () => {
     const { match: { params: { ticker } }, cash, stocks, add, buy } = this.props;
-    if (cash > 0) {
+    const { buyValue } = this.state;
+    if (cash > 0 && buyValue <= cash) {
       this.setState({ message: 'Compra realizada', isFinished: true});
       const objStock = stocks.find((element) => element.ticker === ticker);
       add(objStock);
-      buy(parseInt(objStock.cotacao));
+      buy(parseInt(objStock.cotacao * buyValue));
     } else {
-      this.setState({message: 'Você não possui saldos, por favor realize um depósito e tente novamente', isFinished: true});
+      this.setState({message: 'Você não possui saldo suficiente, por favor realize um depósito e tente novamente', isFinished: true});
     }
   }
 
   sellOperation = () => {
     const { myStocks, match: { params: { ticker } }, stocks, remove, sell } = this.props;
+    const { sellValue } = this.state;
     const find = myStocks.some((element) => element.ticker === ticker);
     if (find) {
       this.setState({ message: 'Venda realizada', isFinished: true});
       const objStock = stocks.find((element) => element.ticker === ticker);
       remove(objStock);
-      sell(parseInt(objStock.cotacao));
+      sell(parseInt(objStock.cotacao * sellValue));
     } else {
       this.setState({message: 'Você ainda não comprou esta ação', isFinished: true});
     }
@@ -44,6 +46,10 @@ class StocksDetails extends Component {
       this.sellOperation();
     }
   }
+
+  handleChange = ({ target: { id, value } }) => {
+    this.setState({ [id]: value });
+  }
   
   render() {
     const headerItems = [
@@ -52,7 +58,7 @@ class StocksDetails extends Component {
       'Ação',
       'Quantidade',
       'Valor (R$)'];
-    const { match: { params: { ticker } }, stocks, cash } = this.props;
+    const { match: { params: { ticker } }, stocks } = this.props;
     const objStock = stocks.find((element) => element.ticker === ticker);
     const { message, isFinished } = this.state;
     return (
@@ -82,32 +88,38 @@ class StocksDetails extends Component {
           </div>
       </div>
       <div>
+      <p>Insira aqui a quantia de ações que você quer adquirir:</p>
+        <Input
+          onChange={ this.handleChange }
+          id="buyValue"
+          type="number"
+          placeholder="Quantidade"
+          min="0"       
+        />
         <Input
           id="buyBtn"
           type="button"
           value="Comprar"
           onClick={ this.handleClick }
         />
-        <Input
-          type="number"
-          placeholder="Valor"
-          min="0"
-          max={ cash }        
-        />
       </div>
       <div>
+      <p>Insira aqui a quantia de ações que você quer vender:</p>
+        <Input
+          onChange={ this.handleChange }
+          id="sellValue"
+          type="number"
+          placeholder="Quantidade"
+          min="0"        
+        />
         <Input
           id="sellBtn"
           type="button"
           value="Vender"
           onClick={ this.handleClick }
         />
-        <Input
-          type="number"
-          placeholder="Valor"
-          min="0"        
-        />
       </div>
+      <h3>Valor da cotação R${objStock.cotacao}</h3>
       {isFinished && <p>{message}</p>}
       <Footer/>
       </>
