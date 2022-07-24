@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 
 class Stocks extends Component {
   componentDidMount = async () => {
-    const {fetch} = this.props;
+    const { fetch } = this.props;
     await (fetch()).payload;
   };
 

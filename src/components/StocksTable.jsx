@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class StocksTable extends Component {
   render() {
@@ -27,7 +28,9 @@ class StocksTable extends Component {
                 <td>{ setor }</td>
                 <td>{ cotacao }</td>
                 <td>
-                  <button type="button">Detalhes</button>
+                  <Link to={`/stocks/${ticker}`}>
+                    <button type="button">Detalhes</button>
+                  </Link>
                 </td>
               </tr>)) }
         </tbody>
