@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Input from '../components/Input';
-import { addStock, removeStock } from '../actions';
+import { addStock, depositCash, drawCash, removeStock } from '../actions';
 import Footer from '../components/Footer';
 
 class StocksDetails extends Component {
@@ -13,24 +13,25 @@ class StocksDetails extends Component {
   }
   
   buyOperation = () => {
-    const { match: { params: { ticker } }, cash, stocks, add } = this.props;
+    const { match: { params: { ticker } }, cash, stocks, add, buy } = this.props;
     if (cash > 0) {
       this.setState({ message: 'Compra realizada', isFinished: true});
       const objStock = stocks.find((element) => element.ticker === ticker);
       add(objStock);
-      console.log(objStock, 'obj');
+      buy(parseInt(objStock.cotacao));
     } else {
       this.setState({message: 'Você não possui saldos, por favor realize um depósito e tente novamente', isFinished: true});
     }
   }
 
   sellOperation = () => {
-    const { myStocks, match: { params: { ticker } }, stocks, remove } = this.props;
+    const { myStocks, match: { params: { ticker } }, stocks, remove, sell } = this.props;
     const find = myStocks.some((element) => element.ticker === ticker);
     if (find) {
       this.setState({ message: 'Venda realizada', isFinished: true});
       const objStock = stocks.find((element) => element.ticker === ticker);
       remove(objStock);
+      sell(parseInt(objStock.cotacao));
     } else {
       this.setState({message: 'Você ainda não comprou esta ação', isFinished: true});
     }
@@ -123,6 +124,8 @@ const mapStateToProps = ({stocksMarket, user}) => ({
 const mapDispatchToProps = (dispatch) => ({
   add: (payload) => dispatch(addStock(payload)),
   remove: (payload) => dispatch(removeStock(payload)),
+  sell: (payload) => dispatch(depositCash(payload)),
+  buy: (payload) => dispatch(drawCash(payload)),
 });
 
 StocksDetails.propTypes = {

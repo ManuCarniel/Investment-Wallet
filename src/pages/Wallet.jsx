@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
 import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import Loading from '../components/Loading';
@@ -45,10 +44,6 @@ class Wallet extends Component {
     if (operation === 'deposit') {
       this.setState({ showPaymentOptions: true });
     } else {
-      /* this.setState({
-        showPaymentOptions: false,
-        message: 'Retirada Completa!'
-      }); */
       draw(parseInt(value));
       this.setDefaultState();
     }
@@ -91,7 +86,6 @@ class Wallet extends Component {
     const { isClicked, isConfirmBtnDisabled, value, showPaymentOptions, concluded, option } = this.state;
     return (
       <div>
-        <Header/>
         <div>
           <h3>Saldo: R${cash}</h3>
         </div>
