@@ -1,9 +1,10 @@
-import { ADD_EMAIL, UPDATE_CASH } from "../actions";
+import { ADD_EMAIL, UPDATE_CASH, UPDATE_STATUS } from "../actions";
 
 const INITIAL_STATE = {
   email: '',
   cash: 15.00,
   isDisabled: true,
+  isLoaded: false,
 };
 
 function validateDrawButton(cash) {
@@ -22,8 +23,11 @@ function user(state = INITIAL_STATE, action) {
     return {
       ...state,
       cash: action.payload, 
-      isDisabled: validateDrawButton(action.payload)
-    };
+      isDisabled: validateDrawButton(action.payload) };
+  case UPDATE_STATUS:
+    return {
+      ...state,
+      isLoaded: action.payload };
   default:
     return state;
   }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import PropTypes from 'prop-types';
 import Input from '../components/Input';
+import Loading from '../components/Loading';
 
 class Wallet extends Component {
   state = {
@@ -12,6 +13,7 @@ class Wallet extends Component {
     showPaymentOptions: false,
     option: '',
     concluded: false,
+    willUpdate: false,
   }
 
   validateConfirmButton = () => {
@@ -110,11 +112,18 @@ class Wallet extends Component {
                   onClick={ this.handleOptionClick }
                 />
                 { concluded && 
-                  <p>
-                    As informações { option } foram enviadas para o email de cadastro.
-                    Você possuí um prazo de 48 horas para concluir o pagamento, caso contrário ele será anulado. 
-                  </p>
-                }
+                  <>
+                    <p>
+                      As informações { option } foram enviadas para o email de cadastro.
+                      Você possuí um prazo de 48 horas para concluir o pagamento, caso contrário ele será anulado. 
+                    </p>
+                    <Loading/>
+                  </>
+                } 
+                {/* { isLoaded && 
+                  () => {}
+
+                } */}
                 </>
               )}
             </>
@@ -129,11 +138,13 @@ class Wallet extends Component {
 const mapStateToProps = ({ user }) => ({
   cash: user.cash,
   isDisabled: user.isDisabled,
+  isLoaded: user.isLoaded,
 });
 
 Wallet.propTypes = {
   cash: PropTypes.number.isRequired,
   isDisabled: PropTypes.bool.isRequired,
+  isLoaded: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, null)(Wallet);
