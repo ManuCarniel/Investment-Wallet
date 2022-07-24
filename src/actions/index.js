@@ -5,8 +5,8 @@ export const FAILED_REQUEST = 'FAILED_REQUEST';
 export const UPDATE_CASH = 'UPDATE_CASH';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
 
-export const addEmail = (payload) => ({type: ADD_EMAIL, payload});
-// export const updateCash = (payload) => ({ type: UPDATE_CASH, payload });
+export const addEmail = (payload) => ({ type: ADD_EMAIL, payload });
+export const updateCash = (payload) => ({ type: UPDATE_CASH, payload });
 
 export const setLoadingStatus = (payload) => ({type: UPDATE_STATUS, payload});
 

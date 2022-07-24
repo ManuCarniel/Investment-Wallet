@@ -4,24 +4,46 @@ import Header from '../components/Header';
 import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import Loading from '../components/Loading';
+import { /* setLoadingStatus, */ updateCash } from '../actions';
 
 class Wallet extends Component {
   state = {
     isClicked: false,
     isConfirmBtnDisabled: false,
-    value: 1.00,
+    value: 0.00,
     showPaymentOptions: false,
     option: '',
     concluded: false,
-    willUpdate: false,
   }
 
   validateConfirmButton = () => {
     const { value } = this.state;
-    const ACCEPTABLE_VALUE = 0.01;
+    const ACCEPTABLE_VALUE = 0.00;
     const validValue = (value > ACCEPTABLE_VALUE);
     this.setState({ isConfirmBtnDisabled: !validValue });
   }
+  
+  setDefaultState = () => {
+    const { /* setStatus, */ deposit } = this.props;
+    const { value } = this.state;
+    deposit(parseInt(value))
+    this.setState({
+      isClicked: false,
+      isConfirmBtnDisabled: false,
+      value: 0.00,
+      showPaymentOptions: false,
+      option: '',
+      concluded: false,
+    });
+    // setStatus(false);
+  }
+
+/*   componentDidUpdate = () => {
+    const { isLoaded, deposit } = this.props;
+    const { value } = this.state;
+    if (isLoaded) deposit(parseInt(value)) /* && this.setDefaultState() */;
+    //  console.log(typeof(value));
+  
 
   handleConfirmClick = () => {
     this.setState({ showPaymentOptions: true });
@@ -117,13 +139,9 @@ class Wallet extends Component {
                       As informações { option } foram enviadas para o email de cadastro.
                       Você possuí um prazo de 48 horas para concluir o pagamento, caso contrário ele será anulado. 
                     </p>
-                    <Loading/>
+                    <Loading loaded={() => this.setDefaultState()}/>
                   </>
                 } 
-                {/* { isLoaded && 
-                  () => {}
-
-                } */}
                 </>
               )}
             </>
@@ -141,10 +159,17 @@ const mapStateToProps = ({ user }) => ({
   isLoaded: user.isLoaded,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  // setStatus: (payload) => dispatch(setLoadingStatus(payload)),
+  deposit: (payload) => dispatch(updateCash(payload)),
+})
+
 Wallet.propTypes = {
   cash: PropTypes.number.isRequired,
   isDisabled: PropTypes.bool.isRequired,
   isLoaded: PropTypes.bool.isRequired,
+  // setStatus: PropTypes.func.isRequired,
+  deposit: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Wallet);
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

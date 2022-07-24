@@ -2,7 +2,7 @@ import { ADD_EMAIL, UPDATE_CASH, UPDATE_STATUS } from "../actions";
 
 const INITIAL_STATE = {
   email: '',
-  cash: 15.00,
+  cash: 0.00,
   isDisabled: true,
   isLoaded: false,
 };
@@ -20,9 +20,10 @@ function user(state = INITIAL_STATE, action) {
       ...state,
       email: action.payload };
   case UPDATE_CASH:
+    const { cash } = state;
     return {
       ...state,
-      cash: action.payload, 
+      cash: cash + action.payload, 
       isDisabled: validateDrawButton(action.payload) };
   case UPDATE_STATUS:
     return {

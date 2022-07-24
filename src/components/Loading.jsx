@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setLoadingStatus } from '../actions';
+// import { setLoadingStatus } from '../actions';
 
 class Loading extends Component {
   state = {
@@ -14,24 +14,31 @@ class Loading extends Component {
   }
 
   componentDidMount = async () => {
-    const { setStatus } = this.props;
+    const { /* setStatus, */ loaded } = this.props;
     await this.timer(5);
     this.setState({status: 'Concluído'});
-    setStatus(true);
+    // setStatus(true);
+    await loaded();
   };
 
   render() {
     const { status } = this.state;
-    return ( <h3>{status}</h3> );
+    return (
+      <>
+        <h3>{status}</h3>
+      </>);
   }
 }
 
 Loading.propTypes = {
-  setStatus: PropTypes.func.isRequired,
+  // setStatus: PropTypes.func.isRequired,
+  loaded: PropTypes.func.isRequired,
 };
+
+export default Loading;
     
-const mapDispatchToProps = (dispatch) => ({
+/* const mapDispatchToProps = (dispatch) => ({
   setStatus: (payload) => dispatch(setLoadingStatus(payload)),
 });
-
-export default connect(null, mapDispatchToProps)(Loading);
+ */
+// export default connect(null, mapDispatchToProps)(Loading);
