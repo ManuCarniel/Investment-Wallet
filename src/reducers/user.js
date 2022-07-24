@@ -1,4 +1,8 @@
-import { ADD_EMAIL, UPDATE_CASH, UPDATE_STATUS } from "../actions";
+import { 
+  ADD_EMAIL,
+  DEPOSIT_CASH,
+  DRAW_CASH
+} from "../actions";
 
 const INITIAL_STATE = {
   email: '',
@@ -7,28 +11,21 @@ const INITIAL_STATE = {
   isLoaded: false,
 };
 
-function validateDrawButton(cash) {
-  const ACCEPTABLE_VALUE = 5;
-  const validValue = (cash >= ACCEPTABLE_VALUE)
-  return validValue;
-};
-
 function user(state = INITIAL_STATE, action) {
+  const { cash } = state;
   switch (action.type) {
   case ADD_EMAIL:
     return {
       ...state,
       email: action.payload };
-  case UPDATE_CASH:
-    const { cash } = state;
+  case DEPOSIT_CASH:
     return {
       ...state,
-      cash: cash + action.payload, 
-      isDisabled: validateDrawButton(action.payload) };
-  case UPDATE_STATUS:
+      cash: cash + (action.payload) };
+  case DRAW_CASH:
     return {
       ...state,
-      isLoaded: action.payload };
+      cash: cash - (action.payload) };
   default:
     return state;
   }

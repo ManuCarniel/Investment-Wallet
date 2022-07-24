@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import Loading from '../components/Loading';
-import { /* setLoadingStatus, */ updateCash } from '../actions';
+import { depositCash, drawCash} from '../actions';
 
 class Wallet extends Component {
   state = {
@@ -14,6 +14,7 @@ class Wallet extends Component {
     showPaymentOptions: false,
     option: '',
     concluded: false,
+    operation: '',
   }
 
   validateConfirmButton = () => {
@@ -24,9 +25,9 @@ class Wallet extends Component {
   }
   
   setDefaultState = () => {
-    const { /* setStatus, */ deposit } = this.props;
-    const { value } = this.state;
-    deposit(parseInt(value))
+    const { deposit } = this.props;
+    const { value, operation } = this.state;
+    if (operation === 'deposit') deposit(parseInt(value))
     this.setState({
       isClicked: false,
       isConfirmBtnDisabled: false,
@@ -35,18 +36,21 @@ class Wallet extends Component {
       option: '',
       concluded: false,
     });
-    // setStatus(false);
   }
 
-/*   componentDidUpdate = () => {
-    const { isLoaded, deposit } = this.props;
-    const { value } = this.state;
-    if (isLoaded) deposit(parseInt(value)) /* && this.setDefaultState() */;
-    //  console.log(typeof(value));
-  
-
   handleConfirmClick = () => {
-    this.setState({ showPaymentOptions: true });
+    const { operation, value } = this.state;
+    const { draw } = this.props;
+    if (operation === 'deposit') {
+      this.setState({ showPaymentOptions: true });
+    } else {
+      /* this.setState({
+        showPaymentOptions: false,
+        message: 'Retirada Completa!'
+      }); */
+      draw(parseInt(value));
+      this.setDefaultState();
+    }
   }
 
   handleOptionClick = ({ target: { id } }) => {
@@ -71,8 +75,18 @@ class Wallet extends Component {
     this.setState({ [id]: value }, () => this.validateConfirmButton());
   }
 
+  handleOperationBtn = ({ target }) => {
+    const { isClicked } = this.state;
+    this.setState({ isClicked: !isClicked });
+    if (target.id === 'drawBtn') {
+      this.setState({ operation: 'draw'});
+    } else {
+      this.setState({ operation: 'deposit'});
+    }
+  }
+
   render() {
-    const { cash, isDisabled } = this.props;
+    const { cash } = this.props;
     const { isClicked, isConfirmBtnDisabled, value, showPaymentOptions, concluded, option } = this.state;
     return (
       <div>
@@ -82,22 +96,23 @@ class Wallet extends Component {
         </div>
         <div>
           <Input 
+            id="drawBtn"
             type="button"
-            disabled={ isDisabled }
             value="Realizar Retirada"
+            onClick={ this.handleOperationBtn }
           />
-          { isDisabled && <p>Você só pode realizar retiradas a partir do valor mínimo de R$5,00</p> }
           <Input 
             id="depositBtn"
             type="button"
             value="Realizar Depósito"
-            onClick={ () => this.setState({ isClicked: !isClicked })}
+            onClick={ this.handleOperationBtn }
           />
           { isClicked && (
             <>
               <Input
                 id="value"
                 type="number"
+                min="0"
                 placeholder="Informe o valor"
                 onChange={ this.handleChange }
                 value={ value }
@@ -111,6 +126,7 @@ class Wallet extends Component {
               <Input
                 type="button"
                 value="Voltar"
+                onClick={ () => this.setState({ isClicked: !isClicked })}
               />
               { showPaymentOptions && (
                 <>
@@ -155,21 +171,17 @@ class Wallet extends Component {
 
 const mapStateToProps = ({ user }) => ({
   cash: user.cash,
-  isDisabled: user.isDisabled,
-  isLoaded: user.isLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // setStatus: (payload) => dispatch(setLoadingStatus(payload)),
-  deposit: (payload) => dispatch(updateCash(payload)),
+  deposit: (payload) => dispatch(depositCash(payload)),
+  draw: (payload) => dispatch(drawCash(payload)),
 })
 
 Wallet.propTypes = {
   cash: PropTypes.number.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
-  isLoaded: PropTypes.bool.isRequired,
-  // setStatus: PropTypes.func.isRequired,
   deposit: PropTypes.func.isRequired,
+  draw: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

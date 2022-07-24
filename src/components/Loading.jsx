@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { setLoadingStatus } from '../actions';
 
 class Loading extends Component {
   state = {
@@ -14,10 +12,9 @@ class Loading extends Component {
   }
 
   componentDidMount = async () => {
-    const { /* setStatus, */ loaded } = this.props;
+    const { loaded } = this.props;
     await this.timer(5);
     this.setState({status: 'Concluído'});
-    // setStatus(true);
     await loaded();
   };
 
@@ -31,14 +28,7 @@ class Loading extends Component {
 }
 
 Loading.propTypes = {
-  // setStatus: PropTypes.func.isRequired,
   loaded: PropTypes.func.isRequired,
 };
 
 export default Loading;
-    
-/* const mapDispatchToProps = (dispatch) => ({
-  setStatus: (payload) => dispatch(setLoadingStatus(payload)),
-});
- */
-// export default connect(null, mapDispatchToProps)(Loading);

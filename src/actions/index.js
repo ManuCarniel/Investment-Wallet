@@ -2,13 +2,12 @@ export const ADD_EMAIL = 'ADD_EMAIL';
 export const REQUEST_STOCKS = 'REQUEST_STOCKS';
 export const RECEIVE_STOCKS = 'RECEIVE_STOCKS';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
-export const UPDATE_CASH = 'UPDATE_CASH';
-export const UPDATE_STATUS = 'UPDATE_STATUS';
+export const DEPOSIT_CASH = 'DEPOSIT_CASH';
+export const DRAW_CASH = 'DRAW_CASH';
 
 export const addEmail = (payload) => ({ type: ADD_EMAIL, payload });
-export const updateCash = (payload) => ({ type: UPDATE_CASH, payload });
-
-export const setLoadingStatus = (payload) => ({type: UPDATE_STATUS, payload});
+export const depositCash = (payload) => ({ type: DEPOSIT_CASH, payload });
+export const drawCash = (payload) => ({ type: DRAW_CASH, payload });
 
 const requestStocks = () => ({
   type: REQUEST_STOCKS});
