@@ -6,14 +6,9 @@ class Footer extends Component {
     return (
       <footer>
         <nav>
-          <Link to="wallet">
+          <Link to="/wallet">
             <button>
               Carteira
-            </button>
-          </Link>
-          <Link to="settings">
-            <button>
-              Configurações    
             </button>
           </Link>
           <Link to="/">
