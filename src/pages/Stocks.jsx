@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import {fetchStocks} from '../actions';
 import StocksTable from '../components/StocksTable';
 import Footer from '../components/Footer';
+import MyStocks from './MyStocks';
 
 class Stocks extends Component {
   componentDidMount = async () => {
-    const {fetch} = this.props;
+    const { fetch } = this.props;
     await (fetch()).payload;
   };
 
@@ -16,6 +17,7 @@ class Stocks extends Component {
     return (
       <div>
         <Header/>
+        <MyStocks/>
         <StocksTable />
         <Footer />
       </div>
