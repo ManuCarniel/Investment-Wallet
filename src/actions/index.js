@@ -2,8 +2,10 @@ export const ADD_EMAIL = 'ADD_EMAIL';
 export const REQUEST_STOCKS = 'REQUEST_STOCKS';
 export const RECEIVE_STOCKS = 'RECEIVE_STOCKS';
 export const FAILED_REQUEST = 'FAILED_REQUEST';
+export const UPDATE_CASH = 'UPDATE_CASH';
 
 export const addEmail = (payload) => ({type: ADD_EMAIL, payload});
+// export const updateCash = (payload) => ({ type: UPDATE_CASH, payload });
 
 const requestStocks = () => ({
   type: REQUEST_STOCKS});
