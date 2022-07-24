@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Input from '../components/Input';
+import { addStock } from '../actions';
 
 class StocksDetails extends Component {
   state = {
@@ -11,21 +12,33 @@ class StocksDetails extends Component {
   }
   
   buyOperation = () => {
-    const { cash } = this.props;
+    const { match: { params: { ticker } }, cash, stocks, add } = this.props;
     if (cash > 0) {
       this.setState({ message: 'Compra realizada', isFinished: true});
+      const objStock = stocks.find((element) => element.ticker === ticker);
+      add(objStock);
+      console.log(objStock, 'obj');
     } else {
       this.setState({message: 'Você não possui saldos, por favor realize um depósito e tente novamente', isFinished: true});
     }
   }
 
+  sellOperation = () => {
+    const { myStocks, match: { params: { ticker } } } = this.props;
+    const find = myStocks.some((element) => element.ticker === ticker);
+    if (find) {
+      this.setState({ message: 'Venda realizada', isFinished: true});
+    } else {
+      this.setState({message: 'Você ainda não comprou esta ação', isFinished: true});
+    }
+  }
+
   handleClick = ({ target }) => {
-    console.log(target.id);
     if (target.id === 'buyBtn') {
       this.buyOperation();
-    } /* else {
-      sellOperation();
-    } */
+    } else {
+      this.sellOperation();
+    }
   }
   
   render() {
@@ -63,7 +76,6 @@ class StocksDetails extends Component {
             </tbody>
             </table>
           </div>
-        {console.log(objStock)}
       </div>
       <div>
         <Input
@@ -101,11 +113,18 @@ class StocksDetails extends Component {
 const mapStateToProps = ({stocksMarket, user}) => ({
   stocks: stocksMarket.stocks,
   cash: user.cash,
+  myStocks: user.stocks,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  add: (payload) => dispatch(addStock(payload)),
 });
 
 StocksDetails.propTypes = {
   stocks: PropTypes.arrayOf(PropTypes.any).isRequired,
   cash: PropTypes.number.isRequired, 
+  add: PropTypes.func.isRequired,
+  myStocks: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
-export default connect(mapStateToProps, null)(StocksDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(StocksDetails);

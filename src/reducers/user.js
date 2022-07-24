@@ -1,5 +1,6 @@
 import { 
   ADD_EMAIL,
+  ADD_STOCK,
   DEPOSIT_CASH,
   DRAW_CASH
 } from "../actions";
@@ -9,6 +10,7 @@ const INITIAL_STATE = {
   cash: 0.00,
   isDisabled: true,
   isLoaded: false,
+  stocks: [],
 };
 
 function user(state = INITIAL_STATE, action) {
@@ -26,6 +28,10 @@ function user(state = INITIAL_STATE, action) {
     return {
       ...state,
       cash: cash - (action.payload) };
+  case ADD_STOCK:
+    return {
+      ...state,
+      stocks: [...state.stocks, action.payload]};
   default:
     return state;
   }
