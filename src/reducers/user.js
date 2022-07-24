@@ -2,7 +2,8 @@ import {
   ADD_EMAIL,
   ADD_STOCK,
   DEPOSIT_CASH,
-  DRAW_CASH
+  DRAW_CASH,
+  REMOVE_STOCK
 } from "../actions";
 
 const INITIAL_STATE = {
@@ -32,6 +33,11 @@ function user(state = INITIAL_STATE, action) {
     return {
       ...state,
       stocks: [...state.stocks, action.payload]};
+  case REMOVE_STOCK:
+    const stocks = state.stocks.filter((el) => el.ticker !== action.payload.ticker);
+    return {
+      ...state,
+      stocks: [...stocks]};
   default:
     return state;
   }

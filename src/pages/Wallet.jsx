@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import Loading from '../components/Loading';
 import { depositCash, drawCash} from '../actions';
+import Footer from '../components/Footer';
 
 class Wallet extends Component {
   state = {
@@ -164,6 +165,7 @@ class Wallet extends Component {
           )}
 
         </div>
+        <Footer/>
       </div>
     );
   }

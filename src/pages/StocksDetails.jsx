@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Input from '../components/Input';
-import { addStock } from '../actions';
+import { addStock, removeStock } from '../actions';
+import Footer from '../components/Footer';
 
 class StocksDetails extends Component {
   state = {
@@ -24,10 +25,12 @@ class StocksDetails extends Component {
   }
 
   sellOperation = () => {
-    const { myStocks, match: { params: { ticker } } } = this.props;
+    const { myStocks, match: { params: { ticker } }, stocks, remove } = this.props;
     const find = myStocks.some((element) => element.ticker === ticker);
     if (find) {
       this.setState({ message: 'Venda realizada', isFinished: true});
+      const objStock = stocks.find((element) => element.ticker === ticker);
+      remove(objStock);
     } else {
       this.setState({message: 'Você ainda não comprou esta ação', isFinished: true});
     }
@@ -105,6 +108,7 @@ class StocksDetails extends Component {
         />
       </div>
       {isFinished && <p>{message}</p>}
+      <Footer/>
       </>
     );
   }
@@ -118,6 +122,7 @@ const mapStateToProps = ({stocksMarket, user}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   add: (payload) => dispatch(addStock(payload)),
+  remove: (payload) => dispatch(removeStock(payload)),
 });
 
 StocksDetails.propTypes = {
@@ -125,6 +130,7 @@ StocksDetails.propTypes = {
   cash: PropTypes.number.isRequired, 
   add: PropTypes.func.isRequired,
   myStocks: PropTypes.arrayOf(PropTypes.any).isRequired,
+  remove: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StocksDetails);
