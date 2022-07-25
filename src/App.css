@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: white;
 }
 
 body, html {
@@ -23,12 +24,12 @@ body, html {
   align-items: center;
   justify-content: center;
   padding: 15px;
-  background-color: #A37871;
+  background-color: #070707;
 }
 
 .background-wallet {
   padding-bottom: 365px;
-  background-color: #F786AA;
+  background-color: #40434E;
 }
 
 title {
@@ -46,7 +47,7 @@ title {
   
   .wrap-background {
     width: 390px;
-    background-color:  #F786AA;
+    background-color:  #C297B8;;
     border-radius: 10px;
     overflow: hidden;
     padding: 77px 55px 33px 55px;
@@ -57,18 +58,18 @@ title {
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
-    background-color: #F786AA;
+    background-color: #C297B8;;
   }
   
   .container-footer {
     display: flex;
     flex-wrap: wrap;
     padding: 15px;
-    background-color: #F786AA;
+    background-color: #C297B8;;
   }
 
   .container-details {
-    background-color: #75B8C8;
+    background-color: #070707;
     height: 695px;
     overflow: hidden;
     padding: 30px 10px 30px 30px;
@@ -77,7 +78,7 @@ title {
   
   .wrap-header {
       width: 350px;
-      background-color: #C297B8;
+      background-color: #40434E;
       border-radius: 10px;
       overflow: hidden;
       padding: 30px 10px 30px 30px;
@@ -86,7 +87,7 @@ title {
   
   .wrap-body {
       width: 900px;
-      background-color: #F786AA;
+      background-color: #C297B8;;
       border-radius: 10px;
       overflow: hidden;
       padding: 30px 10px 30px 30px;
@@ -96,7 +97,7 @@ title {
   
   .wrap-footer {
     width: 250px;
-    background-color: #C297B8;
+    background-color: #40434E;
     border-radius: 10px;
     overflow: hidden;
     padding: 10px 10px 10px 30px;
@@ -116,7 +117,7 @@ title {
   td {
     height: 40px;
     border-radius: 10px;
-    background-color: #FDCFF3;
+    background-color: #40434E;
   }
   
   .input-group {
@@ -130,7 +131,7 @@ title {
   }
   
   .input {
-    border: solid 2px #050505;
+   border: solid 2px #e8e3e3;
    border-radius: 1rem;
    background: none;
    padding: 10px;
