@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import '../App.css';
 
 class Header extends Component {
   render() {
     const { email, cash } = this.props;
     return (
-      <header>
-        <h4>Usuário: { email }</h4>
-        <h4>Saldo: { cash }</h4>
+      <header className="container-header">
+        <div className='wrap-header'>
+          <h4>Usuário: { email }</h4>
+          <h4>Saldo: { cash }</h4>
+        </div>
       </header>
     );
   }

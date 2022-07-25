@@ -5,6 +5,7 @@ import Input from '../components/Input';
 import Loading from '../components/Loading';
 import { depositCash, drawCash} from '../actions';
 import Footer from '../components/Footer';
+import '../App.css';
 
 class Wallet extends Component {
   state = {
@@ -86,78 +87,81 @@ class Wallet extends Component {
     const { isClicked, isConfirmBtnDisabled, value, showPaymentOptions, concluded, option } = this.state;
     return (
       <div>
-        <div>
-          <h3>Saldo: R${cash}</h3>
-        </div>
-        <div>
-          <Input 
-            id="drawBtn"
-            type="button"
-            value="Realizar Retirada"
-            onClick={ this.handleOperationBtn }
-          />
-          <Input 
-            id="depositBtn"
-            type="button"
-            value="Realizar Depósito"
-            onClick={ this.handleOperationBtn }
-          />
-          { isClicked && (
-            <>
-              <Input
-                id="value"
-                type="number"
-                min="0"
-                placeholder="Informe o valor"
-                onChange={ this.handleChange }
-                value={ value }
-              />
-              <Input
+        <div className="background-wallet">
+          <div className="wallet-body">
+            <div className="title">
+              <h3>Saldo: R${cash}</h3>
+            </div>
+            <div>
+              <Input 
+                id="drawBtn"
                 type="button"
-                value="Confirmar"
-                disabled={ isConfirmBtnDisabled }
-                onClick={ this.handleConfirmClick }
+                value="Realizar Retirada"
+                onClick={ this.handleOperationBtn }
               />
-              <Input
+              <Input 
+                id="depositBtn"
                 type="button"
-                value="Voltar"
-                onClick={ () => this.setState({ isClicked: !isClicked })}
+                value="Realizar Depósito"
+                onClick={ this.handleOperationBtn }
               />
-              { showPaymentOptions && (
+              { isClicked && (
                 <>
-                <p>Escolha o método de depósito:</p>
-                <Input
-                  type="button"
-                  id="pix"
-                  value="Via Pix"
-                  onClick={ this.handleOptionClick }
-                />
-                <Input
-                  type="button"
-                  id="boleto"
-                  value="Via Boleto"
-                  onClick={ this.handleOptionClick }
-                />
-                <Input
-                  type="button"
-                  id="trasnferencia"
-                  value="Via Transferência"
-                  onClick={ this.handleOptionClick }
-                />
-                { concluded && 
-                  <>
-                    <p>
-                      As informações { option } foram enviadas para o email de cadastro.
-                      Você possuí um prazo de 48 horas para concluir o pagamento, caso contrário ele será anulado. 
-                    </p>
-                    <Loading loaded={() => this.setDefaultState()}/>
-                  </>
-                } 
+                  <Input
+                    id="value"
+                    type="number"
+                    min="0"
+                    placeholder="Informe o valor"
+                    onChange={ this.handleChange }
+                    value={ value }
+                  />
+                  <Input
+                    type="button"
+                    value="Confirmar"
+                    disabled={ isConfirmBtnDisabled }
+                    onClick={ this.handleConfirmClick }
+                  />
+                  <Input
+                    type="button"
+                    value="Voltar"
+                    onClick={ () => this.setState({ isClicked: !isClicked })}
+                  />
+                  { showPaymentOptions && (
+                    <>
+                    <p>Escolha o método de depósito:</p>
+                    <Input
+                      type="button"
+                      id="pix"
+                      value="Via Pix"
+                      onClick={ this.handleOptionClick }
+                    />
+                    <Input
+                      type="button"
+                      id="boleto"
+                      value="Via Boleto"
+                      onClick={ this.handleOptionClick }
+                    />
+                    <Input
+                      type="button"
+                      id="trasnferencia"
+                      value="Via Transferência"
+                      onClick={ this.handleOptionClick }
+                    />
+                    { concluded && 
+                      <>
+                        <p>
+                          As informações { option } foram enviadas para o email de cadastro.
+                          Você possuí um prazo de 48 horas para concluir o pagamento, caso contrário ele será anulado. 
+                        </p>
+                        <Loading loaded={() => this.setDefaultState()}/>
+                      </>
+                    } 
+                    </>
+                  )}
                 </>
               )}
-            </>
-          )}
-
+            </div>
+          </div>
         </div>
         <Footer/>
       </div>

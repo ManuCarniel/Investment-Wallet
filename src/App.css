@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Knewave&family=Nunito:wght@400;600;700&display=swap%27');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: Nunito, sans-serif;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+ .container-background {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: #A37871;
+}
+
+.background-wallet {
+  padding-bottom: 365px;
+  background-color: #F786AA;
+}
+
+title {
+    margin-right: 973px;
+    border-radius: 2px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  
+  .wallet-body {
+    padding: 1%;
+    height: 100%;
+    margin-bottom: 17%;
+  }
+  
+  .wrap-background {
+    width: 390px;
+    background-color:  #F786AA;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 77px 55px 33px 55px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  .container-header {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    background-color: #F786AA;
+  }
+  
+  .container-footer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    background-color: #F786AA;
+  }
+
+  .container-details {
+    background-color: #75B8C8;
+    height: 695px;
+    overflow: hidden;
+    padding: 30px 10px 30px 30px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  .wrap-header {
+      width: 350px;
+      background-color: #C297B8;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 30px 10px 30px 30px;
+      box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  .wrap-body {
+      width: 900px;
+      background-color: #F786AA;
+      border-radius: 10px;
+      overflow: hidden;
+      padding: 30px 10px 30px 30px;
+      box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+      text-align: center;
+  }
+  
+  .wrap-footer {
+    width: 250px;
+    background-color: #C297B8;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px 10px 10px 30px;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  table {
+    width: 100%;
+    text-align: center;
+  }
+  
+  th {
+    height: 50px;
+    border-radius: 10px;
+    background-color: #C297B8;
+  }
+  td {
+    height: 40px;
+    border-radius: 10px;
+    background-color: #FDCFF3;
+  }
+  
+  .input-group {
+    position: relative
+  }
+  
+  .user-label {
+   color: #DE89BE;
+   transform: translateY(1rem);
+   transition: 150ms cubic-bezier(0.4,0,0.2,1);
+  }
+  
+  .input {
+    border: solid 2px #050505;
+   border-radius: 1rem;
+   background: none;
+   padding: 10px;
+   font-size: 1rem;
+   transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .login-icon {
+    margin-bottom: 10px;
+  }
+  

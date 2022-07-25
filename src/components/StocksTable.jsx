@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Input from './Input';
 
 class StocksTable extends Component {
   render() {
     const headerItems = ['Ticker',
       'Empresa',
       'Setor',
-      'Cotação'];
+      'Cotação', 
+      'Detalhes'];
     const {stocks} = this.props;
     return (
         <table>
@@ -29,7 +31,10 @@ class StocksTable extends Component {
                 <td>{ cotacao }</td>
                 <td>
                   <Link to={`/stocks/${ticker}`}>
-                    <button type="button">Detalhes</button>
+                    <Input 
+                      type="button"
+                      value="Detalhes"
+                    />
                   </Link>
                 </td>
               </tr>)) }

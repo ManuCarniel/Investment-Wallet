@@ -1,14 +1,23 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import '../App.css'
 
 class Input extends Component {
   render() {
     const { id } = this.props;
 
     return (
-      <label htmlFor={ id }>
-        <input { ...this.props } />
-      </label>
+      <div className='input-group'>
+        <label 
+          htmlFor={ id }
+          className="user-label"
+        >
+          <input 
+            { ...this.props }
+            className="input"  
+          />
+        </label>
+      </div>
     );
   }
 }
