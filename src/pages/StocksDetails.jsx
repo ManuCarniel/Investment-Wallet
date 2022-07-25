@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Input from '../components/Input';
 import { addStock, depositCash, drawCash, removeStock } from '../actions';
 import Footer from '../components/Footer';
+import '../App.css';
 
 class StocksDetails extends Component {
   state = {
@@ -65,62 +66,68 @@ class StocksDetails extends Component {
       <>
       <div>
         <Header/>
+        <div className="container-details">
           <div>
-            <h1>Comprar/Vender Ação:</h1>
-            <table>
-            <thead>
-              <tr>
-                {headerItems.map((element, index) => (
-                <th key={ index }>{ element }</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr key={ objStock.id }>
-                <td>{ objStock.empresa }</td>
-                <td>{ objStock.setor }</td>
-                <td>{ ticker }</td>
-                <td> 100 </td>
-                <td>{ 100*objStock.cotacao }</td>
-              </tr>
-            </tbody>
-            </table>
+            <div>
+              <h1>Comprar/Vender Ação:</h1>
+              <table>
+              <thead>
+                <tr>
+                  {headerItems.map((element, index) => (
+                  <th key={ index }>{ element }</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr key={ objStock.id }>
+                  <td>{ objStock.empresa }</td>
+                  <td>{ objStock.setor }</td>
+                  <td>{ ticker }</td>
+                  <td> 100 </td>
+                  <td>{ 100*objStock.cotacao }</td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+        </div>
+        <div className="wrap-btn">
+          <div>
+          <p>Insira aqui a quantia de ações que você quer adquirir:</p>
+            <Input
+              onChange={ this.handleChange }
+              id="buyValue"
+              type="number"
+              placeholder="Quantidade"
+              min="0"       
+            />
+            <Input
+              id="buyBtn"
+              type="button"
+              value="Comprar"
+              onClick={ this.handleClick }
+            />
           </div>
+          <div>
+          <p>Insira aqui a quantia de ações que você quer vender:</p>
+            <Input
+              onChange={ this.handleChange }
+              id="sellValue"
+              type="number"
+              placeholder="Quantidade"
+              min="0"        
+            />
+            <Input
+              id="sellBtn"
+              type="button"
+              value="Vender"
+              onClick={ this.handleClick }
+            />
+          </div>
+        </div>
+        <h3>Valor da cotação R${objStock.cotacao}</h3>
+        {isFinished && <p>{message}</p>}
+        </div>
       </div>
-      <div>
-      <p>Insira aqui a quantia de ações que você quer adquirir:</p>
-        <Input
-          onChange={ this.handleChange }
-          id="buyValue"
-          type="number"
-          placeholder="Quantidade"
-          min="0"       
-        />
-        <Input
-          id="buyBtn"
-          type="button"
-          value="Comprar"
-          onClick={ this.handleClick }
-        />
-      </div>
-      <div>
-      <p>Insira aqui a quantia de ações que você quer vender:</p>
-        <Input
-          onChange={ this.handleChange }
-          id="sellValue"
-          type="number"
-          placeholder="Quantidade"
-          min="0"        
-        />
-        <Input
-          id="sellBtn"
-          type="button"
-          value="Vender"
-          onClick={ this.handleClick }
-        />
-      </div>
-      <h3>Valor da cotação R${objStock.cotacao}</h3>
-      {isFinished && <p>{message}</p>}
       <Footer/>
       </>
     );

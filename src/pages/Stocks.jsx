@@ -15,10 +15,15 @@ class Stocks extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <Header/>
-        <MyStocks/>
-        <StocksTable />
+        <div className="container-background">
+          <div className="wrap-body">
+            <MyStocks/>
+              <h1>Ações</h1>
+            <StocksTable />
+          </div>
+        </div>
         <Footer />
       </div>
     );

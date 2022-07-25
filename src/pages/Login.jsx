@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Input from '../components/Input';
 import { addEmail } from '../actions';
 import { Link } from 'react-router-dom';
+import '../App.css'
 
 class Login extends React.Component {
   state = {
@@ -32,34 +33,53 @@ class Login extends React.Component {
     const { add } = this.props;
 
     return (
-      <div>
-        <h3>Login</h3>
-        <Input
-          placeholder="email"
-          type="email"
-          name="email"
-          id="inputEmail"
-          value={ email }
-          onChange={ this.handleChange }
-        />
-        <Input
-          placeholder="senha"
-          type="password"
-          name="password"
-          id="inputPassword"
-          value={ password }
-          onChange={ this.handleChange }
-        />
-        <Link to="/stocks">
-          <Input
-            type="button"
-            name="loginBtn"
-            id="loginBtn"
-            value="Entrar"
-            disabled={ isDisabled }
-            onClick={ () => add(email) }
-          />
-        </Link>
+      <div className="container">
+        <div className="container-background">
+          <div className="wrap-background">
+            <div className="login-icon">
+              <div>
+                <h2>Bem vindo</h2>
+              </div>
+              <div>
+                <h3>Login</h3>
+              </div>
+            </div>
+            <div>
+              <div>
+                <Input
+                  placeholder="email"
+                  type="email"
+                  name="email"
+                  id="inputEmail"
+                  value={ email }
+                  onChange={ this.handleChange }
+                />
+              </div>
+              <div>
+                <Input
+                  placeholder="senha"
+                  type="password"
+                  name="password"
+                  id="inputPassword"
+                  value={ password }
+                  onChange={ this.handleChange }
+                />
+              </div>
+              <div>
+                <Link to="/stocks">
+                  <Input
+                    type="button"
+                    name="loginBtn"
+                    id="loginBtn"
+                    value="Entrar"
+                    disabled={ isDisabled }
+                    onClick={ () => add(email) }
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
